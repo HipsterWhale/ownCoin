@@ -9,7 +9,12 @@ Rails.application.routes.draw do
 
   # Home controller
   get '/home', to: 'home#index', as: 'home'
-  get '/home/addresses', to: 'home#addresses', as: 'home_addresses'
+
+  # Accounts controller
+  get '/accounts', to: 'accounts#index', as: 'accounts'
+  post '/accounts', to: 'accounts#create'
+  get '/accounts/:account_name/address', to: 'accounts#addresses', as: 'accounts_addresses'
+  get '/accounts/:account_name/transactions', to: 'accounts#transactions', as: 'accounts_transactions'
 
   # Wallet controller
   get '/wallet', to: 'wallet#index', as: 'wallet'

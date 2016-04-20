@@ -9,6 +9,7 @@ ul.list-item {
   list-style: none;
   padding: 0;
   li {
+    margin-top: 4px;
     display: block;
     padding: 9.5px;
     font-size: 13px;
@@ -26,7 +27,7 @@ ul.list-item {
   .address {
     font-weight: 700;
   }
-  .address-label {
+  .amount {
     font-weight: 600;
     font-size: 0.9em;
     color: #AAA;

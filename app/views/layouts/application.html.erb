@@ -21,7 +21,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to 'Home', home_path %></li>
-            <li><%= link_to 'Addresses', home_addresses_path %></li>
+            <li><%= link_to 'Accounts', accounts_path %></li>
             <li><%= link_to 'Wallet', wallet_path %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -33,7 +33,7 @@
     <div class="container">
       <div class="row">
         <div class="information col-xs-3">
-          <h4>Information : </h4>
+          <h4>General information : </h4>
           <div class="balance-view">
             <%= icon('btc') %> <%= @information['balance'] %>
           </div>

@@ -6,8 +6,4 @@ class HomeController < ApplicationController
     @transactions = @bitcoin_client.listtransactions
   end
 
-  def addresses
-    @addresses = @bitcoin_client.listreceivedbyaddress(0, true)
-  end
-
 end

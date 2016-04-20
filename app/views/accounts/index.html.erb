@@ -1,0 +1,40 @@
+<h4>Create new account : </h4>
+
+<% if @account_created %>
+    <div class="alert alert-success" role="alert">Account created with success !</div>
+<% end %>
+
+<% if @account_name_exists %>
+    <div class="alert alert-danger" role="alert">Account with same name already exists !</div>
+<% end %>
+
+<%= form_tag accounts_path, method: :post do %>
+    <div class="form-group">
+      <%= label_tag(:account_name, 'Account name: ') %>
+      <div class="input-group">
+        <span class="input-group-addon"><%= icon('money') %></span>
+        <%= text_field_tag(:account_name, nil, class: 'form-control', placeholder: 'Accout name, ex: donation account', required: '') %>
+      </div>
+      <div style="text-align: right; margin-top: 5px;">
+        <button class="btn btn-primary" type="submit"><%= icon('plus') %>&nbsp;Create account</button>
+      </div>
+    </div>
+<% end %>
+
+<h4>Accounts : </h4>
+
+<ul class="list-item">
+  <% @accounts.each do |name, balance| %>
+    <li class="address-list">
+      <div>
+        <span class="address"><%= name.blank? ? '(no label)' : name %></span>
+        <span class="amount">Balance : <%= icon('btc') %> <%= balance %></span>
+      </div>
+      <div>
+        <%= link_to "#{icon('envelope')} Addresses".html_safe, accounts_addresses_path(account_name: name) %>
+        |
+        <%= link_to "#{icon('exchange')} Transactions".html_safe, accounts_transactions_path(account_name: name) %>
+      </div>
+    </li>
+  <% end %>
+</ul>
