@@ -4,7 +4,7 @@
   <% @addresses.each do |address| %>
     <li class="address-list">
       <div>
-        <span class="address"><%= address['address'] %></span> <span class="label"><%= address['label'] %></span>
+        <span class="address"><%= address['address'] %></span> <span class="address-label"><%= address['label'] %></span>
       </div>
       <div>
         <span class="amount">Amount : <%= icon('btc') %> <%= address['amount'] %></span>

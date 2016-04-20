@@ -8,7 +8,7 @@
   </head>
   <body id="login">
     <div class="container">
-        <%= form_tag login_try_auth_path, method: :post, class: 'form-signin' do %>
+        <%= form_tag login_path, method: :post, class: 'form-signin' do %>
           <%= image_tag 'owncoin.png' %>
           <div class="title">Please sign in</div>
           <% if @error %>

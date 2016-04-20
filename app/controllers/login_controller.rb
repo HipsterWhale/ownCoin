@@ -26,6 +26,7 @@ class LoginController < ApplicationController
   end
 
   def destroy
+    @bitcoin_client.walletlock
     reset_session
     redirect_to '/'
   end
