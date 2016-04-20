@@ -18,11 +18,16 @@ class LoginController < ApplicationController
   end
 
   def dispatcher
-    if session.has_key? 'username'
+    if session.has_key? :username
       redirect_to '/home'
     else
       redirect_to '/login'
     end
+  end
+
+  def destroy
+    reset_session
+    redirect_to '/'
   end
 
   private
