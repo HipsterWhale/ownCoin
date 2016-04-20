@@ -3,4 +3,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  background-color: #eee;
+}
+
 @import "login";
+@import "main";
