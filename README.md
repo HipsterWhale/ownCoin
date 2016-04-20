@@ -1,12 +1,22 @@
-# ownCoin
+# OwnCoin
 
-## Work in progress...
+[logo](https://raw.githubusercontent.com/HipsterWhale/ownCoin/master/app/assets/images/owncoin.png)
 
-Goal : providing a simple way to manage a bitcoin daemon with a user-friendly user interface.
+The aim of this application is to provide a completely operational bitcoin full node and a wallet management in a single command for headless servers. To do this, I bundle a bitcoin daemon with a Ruby on Rails application that consume the JSON-RPC API of the bitcoin daemon.
 
-Still in development. A Readme will come, one day...
+**This is a work in progress, so do not use it right now !**
 
-The UI should be reachable ONLY through a VPN or something like that.
-NEVER expose ownCoin directly to the web, it could be CATASTROPHIC.
+If you want to contribute on this project you can do it by :
 
-This software is distributed with the MIT license : check the LICENSE.md file for more information.
+ - Contributing to the project with pull requests
+ - Make a donation in bitcoin to this address : *1FhxGz1ZhX1VfBLedoanzwNaLuqvAAbRTd*
+
+## How to run it
+
+```
+$ docker run -p 8003:8003 -p 80:80 \
+    -v /volumes/bitcoin/data:/bitcoin_data \
+    -e BC_USERNAME=myusername \
+    -e BC_PASSWORD=mypassword \
+    bahaika/owncoin
+```
