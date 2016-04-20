@@ -1,0 +1,3 @@
+class BitcoinRpc
+
+end
