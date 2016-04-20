@@ -16,6 +16,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 # Use Bootstrap as CSS Framework
 gem 'bootstrap-sass', '~> 3.3.6'
+# Use Font-Awesome to provides icon
+gem 'font-awesome-sass', '~> 4.5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -4,7 +4,8 @@ require 'json'
 
 class BitcoinRPC
   def initialize(username, password)
-    @uri = URI.parse("http://#{username}:#{password}@127.0.0.1:8332")
+    bc_url = ENV['BC_URL'] || '127.0.0.1:8332'
+    @uri = URI.parse("http://#{username}:#{password}@#{bc_url}")
   end
 
   def method_missing(name, *args)
@@ -15,7 +16,7 @@ class BitcoinRPC
   end
 
   def http_post_request(post_body)
-    http    = Net::HTTP.new(@uri.host, @uri.port)
+    http = Net::HTTP.new(@uri.host, @uri.port)
     request = Net::HTTP::Post.new(@uri.request_uri)
     request.basic_auth @uri.user, @uri.password
     request.content_type = 'application/json'
