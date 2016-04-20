@@ -1,2 +1,14 @@
 <h4>Receiving addresses : </h4>
-<%= debug @addresses %>
+
+<ul class="list-item">
+  <% @addresses.each do |address| %>
+    <li class="address-list">
+      <div>
+        <span class="address"><%= address['address'] %></span> <span class="label"><%= address['label'] %></span>
+      </div>
+      <div>
+        <span class="amount">Amount : <%= icon('btc') %> <%= address['amount'] %></span>
+      </div>
+    </li>
+  <% end %>
+</ul>

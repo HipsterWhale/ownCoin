@@ -1,10 +1,19 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
+$brand-primary: #f7931a;
+$nprogress-color: $brand-primary;
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "nprogress";
+@import "nprogress-bootstrap";
 
 body {
   background-color: #eee;
+}
+
+#navbar-icon {
+  height: 35px;
+  margin-top: -9px;
 }
 
 @import "login";
