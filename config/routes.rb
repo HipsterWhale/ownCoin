@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   # Accounts controller
   get '/accounts', to: 'accounts#index', as: 'accounts'
   post '/accounts', to: 'accounts#create'
-  get '/accounts/:account_name/address', to: 'accounts#addresses', as: 'accounts_addresses'
+  get '/accounts/:account_name/addresses', to: 'accounts#addresses', as: 'accounts_addresses'
+  post '/accounts/:account_name/addresses', to: 'accounts#new_address'
   get '/accounts/:account_name/transactions', to: 'accounts#transactions', as: 'accounts_transactions'
+  post '/accounts/move', to: 'accounts#move', as: 'accounts_move'
 
   # Wallet controller
   get '/wallet', to: 'wallet#index', as: 'wallet'

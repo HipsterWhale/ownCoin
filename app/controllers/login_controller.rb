@@ -1,5 +1,7 @@
 class LoginController < ApplicationController
 
+  before_filter :check_user, only: :destroy
+
   def index
     render_view
   end

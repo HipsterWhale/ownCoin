@@ -1,0 +1,23 @@
+<% if @new_address %>
+    <div class="alert alert-success" role="alert">
+      Address <strong><%= @new_address %></strong> created with success !
+    </div>
+<% end %>
+
+<div style="text-align: right; margin-bottom: 6px;">
+  <%= link_to "#{icon('plus')} New address".html_safe, accounts_addresses_path(params[:account_name]), method: :post, class: 'btn btn-primary' %>
+</div>
+
+<ul class="list-item">
+  <% @addresses.reverse.each do |address| %>
+      <li class="transac-list">
+        <div class="txid">
+          <span class="id"><%= address['address'] %></span>
+        </div>
+        <div class="trasac-amount">
+          <%= icon('btc') %> <%= address['amount'] %> |
+          <%= icon('exchange') %> Total transactions : <%= address['txids'].count %>
+        </div>
+      </li>
+  <% end %>
+</ul>
