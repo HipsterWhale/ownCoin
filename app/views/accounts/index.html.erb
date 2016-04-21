@@ -1,77 +1,101 @@
-<h4>Create new account : </h4>
+<div>
 
-<% if @account_created %>
-    <div class="alert alert-success" role="alert">Account created with success !</div>
-<% end %>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#accounts" role="tab" data-toggle="tab">Accounts</a></li>
+    <li role="presentation"><a href="#move" role="tab" data-toggle="tab">Move between accounts</a></li>
+    <li role="presentation"><a href="#new-account" role="tab" data-toggle="tab">Create account</a></li>
+  </ul>
 
-<% if @account_name_exists %>
-    <div class="alert alert-danger" role="alert">Account with same name already exists !</div>
-<% end %>
-
-<%= form_tag accounts_path, method: :post do %>
-    <div class="form-group">
-      <%= label_tag(:account_name, 'Account name: ') %>
-      <div class="input-group">
-        <span class="input-group-addon"><%= icon('money') %></span>
-        <%= text_field_tag(:account_name, nil, class: 'form-control', placeholder: 'Accout name, ex: donation account', required: '') %>
-      </div>
-      <div style="text-align: right; margin-top: 5px;">
-        <button class="btn btn-primary" type="submit"><%= icon('plus') %>&nbsp;Create account</button>
-      </div>
-    </div>
-<% end %>
-
-<h4>Move between accounts : </h4>
-
-<% if @move_success %>
-    <div class="alert alert-success" role="alert">Move done with success !</div>
-<% end %>
-
-<% if @move_error %>
-    <div class="alert alert-danger" role="alert">Can't move coins...</div>
-<% end %>
-
-<div class="row">
-  <%= form_tag accounts_move_path, method: :post do %>
-    <div class="form-group col-sm-4 col-xs-12">
-      <%= label_tag(:from_account, 'From account : ') %>
-      <%= select_tag(:from_account, options_for_select(@select_account), class: 'form-control') %>
-    </div>
-    <div class="form-group col-sm-4 col-xs-12">
-      <%= label_tag(:to_account, 'To account : ') %>
-      <%= select_tag(:to_account, options_for_select(@select_account), class: 'form-control') %>
-    </div>
-    <div class="form-group col-sm-4 col-xs-12">
-      <%= label_tag(:amount, 'Amount : ') %>
-      <div class="input-group">
-        <span class="input-group-addon"><%= icon('btc') %></span>
-        <%= text_field_tag(:amount, nil, class: 'form-control', placeholder: '0.12345678', required: '') %>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="accounts">
+      <div class="tab-container">
+        <ul class="list-item">
+          <% @accounts.each do |name, balance|
+            used_name = name.blank? ? 'Default account' : name
+          %>
+              <li class="address-list">
+                <div>
+                  <span class="address"><%= used_name %></span>
+                  <span class="amount">Balance : <%= icon('btc') %> <%= balance %></span>
+                </div>
+                <div>
+                  <%= link_to "#{icon('envelope')} Addresses".html_safe, accounts_addresses_path(account_name: used_name) %>
+                  |
+                  <%= link_to "#{icon('exchange')} Transactions".html_safe, accounts_transactions_path(account_name: used_name) %>
+                </div>
+              </li>
+          <% end %>
+        </ul>
       </div>
     </div>
-    <div class="form-group col-xs-12" style="margin-top: -8px;">
-      <div style="text-align: right;">
-        <button class="btn btn-primary" type="submit"><%= icon('exchange') %>&nbsp;Move</button>
+    <div role="tabpanel" class="tab-pane" id="move">
+      <div class="tab-container">
+        <% if @move_success %>
+            <div class="alert alert-success" role="alert">Move done with success !</div>
+        <% end %>
+
+        <% if @move_error %>
+            <div class="alert alert-danger" role="alert">Can't move coins...</div>
+        <% end %>
+
+        <div class="row">
+          <%= form_tag accounts_move_path, method: :post do %>
+              <div class="form-group col-sm-4 col-xs-12">
+                <%= label_tag(:from_account, 'From account : ') %>
+                <%= select_tag(:from_account, options_for_select(@select_account), class: 'form-control') %>
+              </div>
+              <div class="form-group col-sm-4 col-xs-12">
+                <%= label_tag(:to_account, 'To account : ') %>
+                <%= select_tag(:to_account, options_for_select(@select_account), class: 'form-control') %>
+              </div>
+              <div class="form-group col-sm-4 col-xs-12">
+                <%= label_tag(:amount, 'Amount : ') %>
+                <div class="input-group">
+                  <span class="input-group-addon"><%= icon('btc') %></span>
+                  <%= text_field_tag(:amount, nil, class: 'form-control', placeholder: '0.12345678', required: '') %>
+                </div>
+              </div>
+              <div class="form-group col-xs-12" style="margin-top: -8px;">
+                <div style="text-align: right;">
+                  <button class="btn btn-primary" type="submit"><%= icon('exchange') %>&nbsp;Move</button>
+                </div>
+              </div>
+          <% end %>
+        </div>
       </div>
     </div>
-  <% end %>
+    <div role="tabpanel" class="tab-pane" id="new-account">
+      <div class="tab-container">
+        <% if @account_created %>
+            <div class="alert alert-success" role="alert">Account created with success !</div>
+        <% end %>
+
+        <% if @account_name_exists %>
+            <div class="alert alert-danger" role="alert">Account with same name already exists !</div>
+        <% end %>
+
+        <%= form_tag accounts_path, method: :post do %>
+            <div class="form-group">
+              <%= label_tag(:account_name, 'Account name: ') %>
+              <div class="input-group">
+                <span class="input-group-addon"><%= icon('money') %></span>
+                <%= text_field_tag(:account_name, nil, class: 'form-control', placeholder: 'Accout name, ex: donation account', required: '') %>
+              </div>
+              <div style="text-align: right; margin-top: 5px;">
+                <button class="btn btn-primary" type="submit"><%= icon('plus') %>&nbsp;Create account</button>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<h4>Accounts : </h4>
 
-<ul class="list-item">
-  <% @accounts.each do |name, balance|
-      used_name = name.blank? ? 'Default account' : name
-  %>
-    <li class="address-list">
-      <div>
-        <span class="address"><%= used_name %></span>
-        <span class="amount">Balance : <%= icon('btc') %> <%= balance %></span>
-      </div>
-      <div>
-        <%= link_to "#{icon('envelope')} Addresses".html_safe, accounts_addresses_path(account_name: used_name) %>
-        |
-        <%= link_to "#{icon('exchange')} Transactions".html_safe, accounts_transactions_path(account_name: used_name) %>
-      </div>
-    </li>
-  <% end %>
-</ul>
+
+
+
+
+
+

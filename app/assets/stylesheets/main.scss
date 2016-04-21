@@ -70,3 +70,30 @@ ul.list-item {
     }
   }
 }
+
+.nav-tabs {
+  li.active a {
+    border-bottom-color: #fff;
+  }
+}
+
+.tab-pane {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-top-color: transparent;
+}
+
+.tab-container {
+  h4:first-of-type {
+    margin-top: 0px;
+  }
+}
+
+.tab-container {
+  padding: 8.5px;
+}
+
+.donate-addr {
+  font-size: 0.9em;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", "Courier, monospace";
+}

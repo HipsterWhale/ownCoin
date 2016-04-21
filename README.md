@@ -7,11 +7,6 @@ To achieve this in a secure way, I bundle a bitcoin daemon with a Ruby on Rails 
 
 **This is a work in progress, so do not use it right now !**
 
-If you want to contribute on this project you can do it by :
-
- - Contributing to the project with pull requests
- - Make a donation in bitcoin to this address : *1FhxGz1ZhX1VfBLedoanzwNaLuqvAAbRTd*
-
 ## How to run it
 
 ```

@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   post '/wallet', to: 'wallet#try_unlock'
   delete '/wallet', to: 'wallet#do_lock'
   post '/wallet/send', to: 'wallet#send_bitcoins', as: 'wallet_send'
+  post '/wallet/change', to: 'wallet#change_password', as: 'wallet_change'
 
 end

@@ -28,6 +28,18 @@ class WalletController < ApplicationController
     redirect_to wallet_url
   end
 
+  def change_password
+    begin
+      @bitcoin_client.walletpassphrasechange(params[:old_password], params[:new_password])
+      @change_success = true
+    rescue
+      @change_failed = true
+    end
+    is_wallet_unlocked?
+    basic_check_wallet
+    render :index
+  end
+
   private
 
     def basic_check_wallet

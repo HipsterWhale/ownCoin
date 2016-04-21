@@ -8,18 +8,21 @@
   </head>
   <body id="login">
     <div class="container">
-        <%= form_tag login_path, method: :post, class: 'form-signin' do %>
-          <%= image_tag 'owncoin.png' %>
-          <div class="title">Please sign in</div>
-          <% if @error %>
-              <div class="alert alert-danger" role="alert">Bad authentication...</div>
-          <% end %>
-          <%= text_field_tag(:username, nil, class: 'form-control', placeholder: 'Username') %>
-          <%= password_field_tag(:password, nil, class: 'form-control', placeholder: 'Password') %>
-          <div class="btn-holder">
-            <button class="btn btn-primary" type="submit"><%= icon('sign-in') %>&nbsp;Sign in</button>
-          </div>
+      <%= form_tag login_path, method: :post, class: 'form-signin' do %>
+        <%= image_tag 'owncoin.png' %>
+        <div class="title">Please sign in</div>
+        <% if @error %>
+            <div class="alert alert-danger" role="alert">Bad authentication...</div>
         <% end %>
+        <%= text_field_tag(:username, nil, class: 'form-control', placeholder: 'Username') %>
+        <%= password_field_tag(:password, nil, class: 'form-control', placeholder: 'Password') %>
+        <div class="btn-holder">
+          <button class="btn btn-primary" type="submit"><%= icon('sign-in') %>&nbsp;Sign in</button>
+        </div>
+        <div class="login-links">
+          <a href="https://github.com/HipsterWhale/ownCoin"><%= icon('github') %></a>
+        </div>
+      <% end %>
     </div>
   </body>
 </html>
