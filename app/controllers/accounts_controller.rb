@@ -4,6 +4,7 @@ class AccountsController < ApplicationController
   before_action :list_accounts
 
   def index
+    list_select_accounts
   end
 
   def create
@@ -15,6 +16,7 @@ class AccountsController < ApplicationController
       list_accounts
       @account_created = true
     end
+    list_select_accounts
     render :index
   end
 
@@ -29,10 +31,29 @@ class AccountsController < ApplicationController
   end
 
   def transactions
-    @transactions = @bitcoin_client.listtransactions(params[:account_name])
+    @transactions = @bitcoin_client.listtransactions(real_account_name(params[:account_name]))
+  end
+
+  def move
+    begin
+      @bitcoin_client.move(params[:from_account],params[:to_account],params[:amount])
+      @move_success = true
+    rescue
+      @move_error = true
+    end
+    list_select_accounts
+    render :index
   end
 
   private
+
+    def real_account_name(account_name)
+      if account_name == 'Default account'
+        ''
+      else
+        account_name
+      end
+    end
 
     def list_accounts
       @accounts = @bitcoin_client.listaccounts
@@ -40,7 +61,7 @@ class AccountsController < ApplicationController
 
     def list_addresses
       @addresses = @bitcoin_client.listreceivedbyaddress(0, true).select { |address|
-        address['account'] == params[:account_name]
+        address['account'] == real_account_name(params[:account_name])
       }
     end
 

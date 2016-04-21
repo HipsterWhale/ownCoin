@@ -5,6 +5,7 @@ class WalletController < ApplicationController
   def index
     if @wallet_unlocked
       @lock_date = lock_date
+      list_select_accounts
     else
       # Enforce wallet locking
       lock_wallet

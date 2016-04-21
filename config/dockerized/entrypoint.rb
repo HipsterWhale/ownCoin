@@ -10,7 +10,7 @@ def generate_bitcoind_config
   config_file << 'rpcport=8332'
   config_file << 'rpcconnect=127.0.0.1'
   config_file << 'rpcssl=0'
-  config_file << 'datadir=/bitcoin_data'
+  config_file << 'datadir=/data/bicoind'
   File.open(BITCOIN_CONF_FILE, 'w') do |file|
     file.write config_file.join("\n")
   end
@@ -29,12 +29,11 @@ if ARGV.count == 0
     exec 'puma -b unix:///var/run/puma.sock -e RPC_USERNAME='
   end
 
-  # Generating bitcoin daemon configuration
-  generate_bitcoind_config unless File.exists? BITCOIN_CONF_FILE
-
   # Starting bitcoin daemon
   fork do
-    system "bitcoind 	-conf=#{BITCOIN_CONF_FILE}"
+    # Generating bitcoin daemon configuration
+    generate_bitcoind_config unless File.exists? BITCOIN_CONF_FILE
+    exec "bitcoind 	-conf=#{BITCOIN_CONF_FILE}"
   end
 
   # Sleep main process

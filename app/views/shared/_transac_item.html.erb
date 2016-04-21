@@ -1,0 +1,36 @@
+<ul class="list-item">
+  <% @transactions.reverse.each do |transaction| %>
+    <li class="transac-list">
+      <div class="txid">
+        <% if transaction['category'] == 'send' %>
+            <span class="send"><%= icon('arrow-up') %></span>
+        <% elsif transaction['category'] == 'move'  %>
+            <% if transaction['amount'] > 0 %>
+                <span class="receive"><%= icon('arrow-down') %></span>
+            <% else %>
+                <span class="send"><%= icon('arrow-up') %></span>
+            <% end %>
+        <% else %>
+            <span class="receive"><%= icon('arrow-down') %></span>
+        <% end %>
+        <span class="id"><%= transaction['txid'] %></span>
+        <span class="account"><%= transaction['account'] %></span>
+      </div>
+      <div class="trasac-amount">
+        <%= icon('btc') %> <%= transaction['amount'] %>
+        <% if transaction.has_key? 'confirmations' %>
+            |
+            <%= icon('thumbs-o-up') %> <%= transaction['confirmations'] %>
+        <% end %>
+      </div>
+      <% if transaction.has_key? 'confirmations' and transaction['confirmations'] < 6 %>
+          <div class="progress" style="margin-bottom:0px;">
+            <div class="progress-bar progress-bar-striped active" style="width: <%= transaction['confirmations'].to_f / 6.to_f * 100 %>%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+          <em>Confirming...</em>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

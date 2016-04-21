@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def list_select_accounts
+      @select_account = @bitcoin_client.listaccounts.map { |name, balance|
+                          name = 'Default account' if name == ''
+                          ["#{name} - BTC #{balance}", name]
+                        }
+    end
+
 end
