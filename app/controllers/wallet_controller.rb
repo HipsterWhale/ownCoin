@@ -3,13 +3,7 @@ class WalletController < ApplicationController
   before_filter :check_user, :is_wallet_unlocked?
 
   def index
-    if @wallet_unlocked
-      @lock_date = lock_date
-      list_select_accounts
-    else
-      # Enforce wallet locking
-      lock_wallet
-    end
+    basic_check_wallet
   end
 
   def try_unlock
@@ -18,7 +12,14 @@ class WalletController < ApplicationController
   end
 
   def send_bitcoins
-
+    begin
+      @bitcoin_client.sendfrom real_account_name(params[:send_from]), params[:send_to], params[:amount]
+      @send_success = true
+    rescue
+      @send_failed = true
+    end
+    basic_check_wallet
+    render :index
   end
 
   def do_lock
@@ -29,6 +30,16 @@ class WalletController < ApplicationController
 
   private
 
+    def basic_check_wallet
+      if @wallet_unlocked
+        @lock_date = lock_date
+        list_select_accounts
+      else
+        # Enforce wallet locking
+        lock_wallet
+      end
+    end
+
     def lock_wallet
       @bitcoin_client.walletlock
     end
@@ -36,7 +47,6 @@ class WalletController < ApplicationController
     def unlock_wallet(password)
       begin
         @bitcoin_client.walletpassphrase(password, 600)
-        session[:lock_date] = DateTime.now + 600.seconds
         true
       rescue
         false
@@ -44,11 +54,11 @@ class WalletController < ApplicationController
     end
 
     def lock_date
-      DateTime.parse(session[:lock_date])
+      DateTime.strptime(@information['unlocked_until'].to_s,'%s')
     end
 
     def is_wallet_unlocked?
-      @wallet_unlocked = (session.has_key?(:lock_date) and not lock_date.past?)
+      @wallet_unlocked = @information['unlocked_until'] > 0
     end
 
 end

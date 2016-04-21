@@ -17,7 +17,6 @@ ENV RAILS_ENV production
 # Copying nginx configuration
 RUN rm -rf /etc/nginx/sites-* /etc/nginx/conf.d
 COPY ./config/dockerized/nginx.conf /etc/nginx/nginx.conf
-COPY ./config/dockerized/redis.conf /etc/redis.conf
 
 # Creating application folder
 RUN mkdir -p $APP_HOME
@@ -39,7 +38,7 @@ EXPOSE 80 8333
 COPY ./config/dockerized/entrypoint.rb /entrypoint
 ENTRYPOINT ["/entrypoint"]
 RUN chmod +x /entrypoint
-RUN mkdir -p /data/bicoind /data/redis
+RUN mkdir -p /data
 
 VOLUME ["/data"]
 

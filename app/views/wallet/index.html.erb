@@ -6,6 +6,14 @@
 
     <h4>Send bitcoins</h4>
 
+    <% if @send_success %>
+        <div class="alert alert-success" role="alert">Successfully sent coins !</div>
+    <% end %>
+
+    <% if @send_failed %>
+        <div class="alert alert-danger" role="alert">Can't send coins...</div>
+    <% end %>
+
     <%= form_tag wallet_send_path, method: :post do %>
         <div class="form-group">
           <%= label_tag(:send_from, 'Send from : ') %>

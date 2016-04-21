@@ -14,7 +14,7 @@
             <span class="receive"><%= icon('arrow-down') %></span>
         <% end %>
         <span class="id"><%= transaction['txid'] %></span>
-        <span class="account"><%= transaction['account'] %></span>
+        <span class="account"><%= transaction['account'].blank? ? 'Default account' : transaction['account'] %></span>
       </div>
       <div class="trasac-amount">
         <%= icon('btc') %> <%= transaction['amount'] %>
@@ -26,7 +26,6 @@
       <% if transaction.has_key? 'confirmations' and transaction['confirmations'] < 6 %>
           <div class="progress" style="margin-bottom:0px;">
             <div class="progress-bar progress-bar-striped active" style="width: <%= transaction['confirmations'].to_f / 6.to_f * 100 %>%;">
-              <span class="sr-only">60% Complete</span>
             </div>
           </div>
           <em>Confirming...</em>

@@ -5,14 +5,30 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def real_account_name(account_name)
+      if account_name == 'Default account'
+        ''
+      else
+        account_name
+      end
+    end
+
     def check_user
       redirect_to '/login' unless session.has_key? :username
       @bitcoin_client = BitcoinRPC.new session[:username], session[:password]
       begin
         @information = @bitcoin_client.getinfo
+        @current, @total = day_late
       rescue
         redirect_to '/login'
       end
+    end
+
+    def day_late
+      current = @bitcoin_client.getblockcount
+      uri = URI('https://blockchain.info/q/getblockcount')
+      total = Net::HTTP.get(uri)
+      return current.to_i, total.to_i
     end
 
     def list_select_accounts

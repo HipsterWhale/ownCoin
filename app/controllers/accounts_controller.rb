@@ -47,14 +47,6 @@ class AccountsController < ApplicationController
 
   private
 
-    def real_account_name(account_name)
-      if account_name == 'Default account'
-        ''
-      else
-        account_name
-      end
-    end
-
     def list_accounts
       @accounts = @bitcoin_client.listaccounts
     end

@@ -12,12 +12,3 @@ function softReload() {
     Turbolinks.visit(location.toString());
     Turbolinks.enableTransitionCache(false);
 }
-var moveTimeout;
-$(document).on('ready page:load', function() {
-    clearTimeout(moveTimeout);
-    moveTimeout = setTimeout(softReload, 7000);
-});
-$(document).mousemove(function() {
-    clearTimeout(moveTimeout);
-    moveTimeout = setTimeout(softReload, 7000);
-});
