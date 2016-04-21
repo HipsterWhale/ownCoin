@@ -13,15 +13,29 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def try_encrypt
+      begin
+        return if @@encrypted
+      rescue
+        begin
+          @bitcoin_client.encryptwallet session[:password]
+          @@encrypted = true
+        rescue
+          @@encrypted = true
+        end
+      end
+    end
+
     def check_user
       redirect_to '/login' unless session.has_key? :username
       @bitcoin_client = BitcoinRPC.new session[:username], session[:password]
-      begin
+      #begin
         @information = @bitcoin_client.getinfo
+        try_encrypt
         @current, @total = day_late
-      rescue
-        redirect_to '/login'
-      end
+      #rescue
+        #redirect_to '/login'
+      #end
     end
 
     def day_late
