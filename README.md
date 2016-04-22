@@ -4,7 +4,7 @@
 
 ## What is it ?
 
-OwnCoin is a bundle of a bitcoin server and a web application connecting to that server. The goal is to provide an easy and secure way to host your own bitcoin wallet, with multiple count support etc... To achieve such a goal we're using Docker to bundle all the things.
+OwnCoin is a bundle of a bitcoin server and a web application connecting to that server. The goal is to provide an easy and secure way to host your own bitcoin wallet, with multiple account support etc... To achieve such a goal we're using Docker to bundle all the things.
 
 ## How does this works inside ?
 
