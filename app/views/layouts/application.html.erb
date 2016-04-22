@@ -41,7 +41,7 @@
           <div><%= icon('link') %> <%= @information['connections'] %> connections</div>
           <div>
             <%= icon('refresh') %> <%= @total - @current  %> blocks late
-            <% if @total != @current %>
+            <% if (@total - @current) > 0 %>
               <div class="progress" style="margin-bottom:0px;">
                 <div class="progress-bar progress-bar-striped active" style="width: <%= @current.to_f / @total.to_f * 100 %>%;">
                 </div>

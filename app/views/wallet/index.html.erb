@@ -16,6 +16,7 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#send" role="tab" data-toggle="tab">Send coins</a></li>
         <li role="presentation"><a href="#change" role="tab" data-toggle="tab">Change password</a></li>
+        <li role="presentation"><a href="#download" role="tab" data-toggle="tab">Download wallet</a></li>
       </ul>
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="send">
@@ -74,6 +75,11 @@
                   <button class="btn btn-primary" type="submit"><%= icon('lock') %>&nbsp;Change</button>
                 </div>
             <% end %>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane active" id="download">
+          <div class="tab-container">
+            <a href="/wallet/download" class="btn btn-success"><%= icon('download') %>&nbsp;Download backup wallet</a>
           </div>
         </div>
       </div>

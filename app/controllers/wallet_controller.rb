@@ -1,5 +1,7 @@
 class WalletController < ApplicationController
 
+  WALLET_BACKUP_FILE = '/tmp/wallet.dat'
+
   before_filter :check_user, :is_wallet_unlocked?
 
   def index
@@ -26,6 +28,16 @@ class WalletController < ApplicationController
     lock_wallet
     session.delete :lock_date
     redirect_to wallet_url
+  end
+
+  def download
+    begin
+      File.delete(WALLET_BACKUP_FILE) if File.exist?(WALLET_BACKUP_FILE)
+      @bitcoin_client.backupwallet WALLET_BACKUP_FILE
+      send_file WALLET_BACKUP_FILE
+    rescue
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   def change_password

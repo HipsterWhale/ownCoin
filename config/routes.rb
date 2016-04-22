@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   # Wallet controller
   get '/wallet', to: 'wallet#index', as: 'wallet'
+  get '/wallet/download', to: 'wallet#download', as: 'wallet_download'
   post '/wallet', to: 'wallet#try_unlock'
   delete '/wallet', to: 'wallet#do_lock'
   post '/wallet/send', to: 'wallet#send_bitcoins', as: 'wallet_send'
