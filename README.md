@@ -36,5 +36,5 @@ $ docker run --name=owncoin \
 There is two way for contrinuting to this software :
 
  - Make a pull request, I'll review it.
- - Make a donation to this bitcoin address : `1FhxGz1ZhX1VfBLedoanzwNaLuqvAAbRTd`
+ - Make a donation to this bitcoin address : `194V2BoPvDEMdYP2nyrX2djuHQJsm13sF1`
 
