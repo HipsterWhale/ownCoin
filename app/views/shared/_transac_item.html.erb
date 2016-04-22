@@ -18,9 +18,12 @@
       </div>
       <div class="trasac-amount">
         <%= icon('btc') %> <%= transaction['amount'] %>
+        | <%= icon('calendar') %> <%= I18n.l DateTime.strptime(transaction['time'].to_s,'%s') %>
+        <% if transaction.has_key? 'fee' %>
+          | <%= icon('credit-card') %> Fee : <%= '%.8f' % transaction['fee'] %>
+        <% end %>
         <% if transaction.has_key? 'confirmations' %>
-            |
-            <%= icon('thumbs-o-up') %> <%= transaction['confirmations'] %>
+          | <%= icon('thumbs-o-up') %> <%= transaction['confirmations'] %>
         <% end %>
       </div>
       <% if transaction.has_key? 'confirmations' and transaction['confirmations'] < 6 %>
