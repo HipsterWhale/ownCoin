@@ -36,7 +36,8 @@ class AccountsController < ApplicationController
 
   def move
     begin
-      @bitcoin_client.move(params[:from_account],params[:to_account],params[:amount])
+      @bitcoin_client.move(real_account_name(params[:from_account]),
+                           real_account_name(params[:to_account]),params[:amount])
       @move_success = true
     rescue
       @move_error = true
