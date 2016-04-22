@@ -15,7 +15,7 @@ Inside the container the entrypoint will start the following components :
 
 ## Can you show me what it looks like ?
 
-I will soon upload some screenshots, probably in the mean time I'll be realising a stable version.
+I will soon upload some screenshots.
 
 ## Okay, I want to have it !
 
