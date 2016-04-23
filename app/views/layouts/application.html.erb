@@ -39,7 +39,7 @@
           <div class="balance-view">
             <h5>Balance</h5>
             <%= icon('btc') %> <%= @information['balance'] %>
-            <%= icon('eur') %> <%= BlockrBtcApi.btc_to_eur @information['balance'] %>
+            <%= icon('eur') %> <%= BLOCKR.btc_to_eur @information['balance'] %>
           </div>
           <div><%= icon('link') %> <%= @information['connections'] %> connections</div>
           <div>
