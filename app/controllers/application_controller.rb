@@ -29,16 +29,16 @@ class ApplicationController < ActionController::Base
     def check_user
       redirect_to '/login' unless session.has_key? :username
       @bitcoin_client = BitcoinRPC.new session[:username], session[:password]
-      #begin
+      begin
         @information = @bitcoin_client.getinfo
         try_encrypt
-        @current, @total = day_late
-      #rescue
-        #redirect_to '/login'
-      #end
+        @current, @total = block_late
+      rescue
+        redirect_to '/login'
+      end
     end
 
-    def day_late
+    def block_late
       current = @bitcoin_client.getblockcount
       uri = URI('https://blockchain.info/q/getblockcount')
       total = Net::HTTP.get(uri)

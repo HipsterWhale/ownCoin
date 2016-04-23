@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get '/accounts/:account_name/transactions', to: 'accounts#transactions', as: 'accounts_transactions'
   post '/accounts/move', to: 'accounts#move', as: 'accounts_move'
 
+  # Exchange
+  get '/exchange', to: 'exchange#index', as: 'exchange'
+
   # Wallet controller
   get '/wallet', to: 'wallet#index', as: 'wallet'
   get '/wallet/download', to: 'wallet#download', as: 'wallet_download'
