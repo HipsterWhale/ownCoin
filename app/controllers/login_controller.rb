@@ -7,16 +7,16 @@ class LoginController < ApplicationController
   end
 
   def try_auth
-    bc_client = BitcoinRPC.new params[:username], params[:password]
-    begin
-      bc_client.getbalance
-      session[:username] = params[:username]
-      session[:password] = params[:password]
-      redirect_to '/home'
-    rescue
-      @error = true
-      render_view
-    end
+    if ENV.has_key? 'DEBUG'
+      sub_try_auth
+    else
+      begin
+        sub_try_auth
+      rescue
+        @error = true
+        render_view
+      end
+    endS
   end
 
   def dispatcher
@@ -34,6 +34,14 @@ class LoginController < ApplicationController
   end
 
   private
+
+    def sub_try_auth
+      bc_client = BitcoinRPC.new params[:username], params[:password]
+      bc_client.getbalance
+      session[:username] = params[:username]
+      session[:password] = params[:password]
+      redirect_to '/home'
+    end
 
     def render_view
       render :index, layout: nil

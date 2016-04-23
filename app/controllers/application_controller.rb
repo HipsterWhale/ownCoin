@@ -29,14 +29,22 @@ class ApplicationController < ActionController::Base
     def check_user
       redirect_to '/login' unless session.has_key? :username
       @bitcoin_client = BitcoinRPC.new session[:username], session[:password]
-      begin
-        @information = @bitcoin_client.getinfo
-        try_encrypt
-        @current, @total = block_late
-        @blockr = BlockrBtcApi.new
-      rescue
-        redirect_to '/login'
+      if ENV.has_key? 'DEBUG'
+        sub_check_user
+      else
+        begin
+          sub_check_user
+        rescue
+          redirect_to '/login'
+        end
       end
+    end
+
+    def sub_check_user
+      @information = @bitcoin_client.getinfo
+      try_encrypt
+      @current, @total = block_late
+      @blockr = BlockrBtcApi.new
     end
 
     def block_late
