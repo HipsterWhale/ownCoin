@@ -1,1 +1,0 @@
-BLOCKR = BlockrBtcApi.new

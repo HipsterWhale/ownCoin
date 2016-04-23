@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
         @information = @bitcoin_client.getinfo
         try_encrypt
         @current, @total = block_late
+        @blockr = BlockrBtcApi.new
       rescue
         redirect_to '/login'
       end
