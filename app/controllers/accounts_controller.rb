@@ -35,15 +35,10 @@ class AccountsController < ApplicationController
   end
 
   def move
-    begin
-      @bitcoin_client.move(real_account_name(params[:from_account]),
-                           real_account_name(params[:to_account]),params[:amount])
-      @move_success = true
-    rescue
-      @move_error = true
-    end
-    list_select_accounts
-    render :index
+    @bitcoin_client.move(real_account_name(params[:from_account]),
+                         real_account_name(params[:to_account]),
+                         params[:amount])
+    redirect_to accounts_path
   end
 
   private
