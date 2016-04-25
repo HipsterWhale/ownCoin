@@ -8,7 +8,11 @@ def generate_bitcoind_config
   config_file << "rpcuser=#{ENV['BC_USERNAME']}"
   config_file << "rpcpassword=#{ENV['BC_PASSWORD']}"
   config_file << 'rpcport=8332'
-  config_file << 'rpcconnect=127.0.0.1'
+  if ENV.has_key? 'DEBUG'
+    config_file << 'rpcconnect=0.0.0.0'
+  else
+    config_file << 'rpcconnect=127.0.0.1'
+  end
   config_file << 'rpcssl=0'
   config_file << 'datadir=/data/bitcoind'
   File.open(BITCOIN_CONF_FILE, 'w') do |file|
