@@ -26,10 +26,8 @@ class BlockrBtc
 
     def exchange_rate
       if @@cached_rate and @@cached_rate[:date].future?
-        puts 'from cache'
         @@cached_rate[:rate]
       else
-        puts 'from api'
         current_rate = ask_api(API_URL)
         @@cached_rate = {
             rate: current_rate,
