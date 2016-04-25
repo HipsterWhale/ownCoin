@@ -1,8 +1,19 @@
 .information {
   .balance-view {
-    font-size: 1.2em;
-    font-weight: 700;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #CCC;
+    .balance-title {
+      font-size: 1.15em;
+      font-weight: 700;
+    }
   }
+}
+
+.lighten-text {
+  color: #666;
 }
 
 ul.list-item {

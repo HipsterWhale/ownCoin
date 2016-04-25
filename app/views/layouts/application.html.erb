@@ -22,7 +22,6 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to 'Home', home_path %></li>
-            <li><%= link_to 'Exchange', exchange_path %></li>
             <li><%= link_to 'Accounts', accounts_path %></li>
             <li><%= link_to 'Wallet', wallet_path %></li>
           </ul>
@@ -37,9 +36,10 @@
         <div class="information col-xs-3">
           <h4>General information : </h4>
           <div class="balance-view">
-            <h5>Balance</h5>
-            <%= icon('btc') %> <%= @information['balance'] %>
-            <%= icon('eur') %> <%= @blockr.btc_to_eur(@information['balance'].to_f) %>
+            <div class="balance-title">Balance : </div>
+            &nbsp;&nbsp;<%= icon('btc') %> <%= @information['balance'] %><br>
+            &nbsp;&nbsp;<%= icon('eur') %> <%= @blockr.btc_to_eur(@information['balance'].to_f) %><br>
+            &nbsp;&nbsp;<%= icon('usd') %> <%= @blockr.btc_to_usd(@information['balance'].to_f) %>
           </div>
           <div><%= icon('link') %> <%= @information['connections'] %> connections</div>
           <div>
